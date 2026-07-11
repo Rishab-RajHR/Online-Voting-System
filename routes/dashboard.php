@@ -4,18 +4,66 @@
         header("location: ../");
     }
 
+    $userdata = $_SESSION['userdata'];
+
 ?>
 
 <html>
    <head>
        <title>Online Voting System - Dashboard</title>
+       <link rel="stylesheet" href="../css/stylesheet.css">
    </head>
    <body>
-      <button>Back</button>
-      <button>Logout</button>
-      <h1>Online Voting System</h1>
-      <hr>
-      <div id="Profile"></div>
-      <div id="Group"></div>
+      <style>
+           #backBtn{
+             padding: 5px;
+             font-size: 15px;
+             border-radius: 5px;
+             background-color: #3498db;
+             color: white;
+             float: left;
+           }
+
+           #logoutBtn{
+              padding: 5px;
+              font-size: 15px;
+              border-radius: 5px;
+              background-color: #3498db;
+              color: white;
+              float: right;
+           }
+
+           #Profile{
+             background-color: white;
+             width: 40%;
+             padding: 20px;
+             float: left;
+           }
+      </style>
+
+       <div id="mainSection">
+          <center>
+          <div id="headerSection">
+            <button id="backBtn">Back</button>
+            <button id="logoutBtn">Logout</button>
+            <h1>Online Voting System</h1>
+          </div>
+          </center>
+           <hr>
+
+           <div id="Profile">
+              <center><img src="../uploads/<?php echo $userdata['photo']?>" height="100" width="100"></center><br><br>
+              <b>Name:</b><?php echo $userdata['name']?><br><br>
+              <b>Mobile:</b><?php echo $userdata['mobile']?><br><br>
+              <b>Address:</b><?php echo $userdata['address']?><br><br>
+              <b>Status:</b><?php echo $userdata['status']?><br><br>
+           </div>
+
+          <div id="Group">
+
+          </div>
+
+       </div>
+     
    </body>
 </html>
