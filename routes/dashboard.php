@@ -5,6 +5,7 @@
     }
 
     $userdata = $_SESSION['userdata'];
+    $groupsdata = $_SESSION['groupsdata'];
 
 ?>
 
@@ -35,10 +36,30 @@
 
            #Profile{
              background-color: white;
-             width: 40%;
+             width: 30%;
              padding: 20px;
              float: left;
            }
+
+           #Group{
+              background-color: white;
+              width: 60%;
+              padding: 20px;
+              float: right;
+           }
+
+           #votebtn{
+              padding: 5px;
+              font-size: 15px;
+              background-color: #3498db;
+              color: white;
+              border-radius: 5px;
+           }
+
+         #mainpanel{
+             padding: 10px;
+         }
+   
       </style>
 
        <div id="mainSection">
@@ -51,7 +72,8 @@
           </center>
            <hr>
 
-           <div id="Profile">
+           <div id="mainpanel">
+                 <div id="Profile">
               <center><img src="../uploads/<?php echo $userdata['photo']?>" height="100" width="100"></center><br><br>
               <b>Name:</b><?php echo $userdata['name']?><br><br>
               <b>Mobile:</b><?php echo $userdata['mobile']?><br><br>
@@ -60,8 +82,28 @@
            </div>
 
           <div id="Group">
+              <?php 
+                 if($_SESSION['groupsdata'])
+                  {
+                       for($i=0; $i<count($groupsdata); $i++){
+                          ?>
+                          <div>
+                              <img style="font:right" src="../uploads/<?php echo $groupsdata[$i]['photo'] ?>" height="100" width="100">
+                             <b>Group Name: </b><?php echo $groupsdata[$i]['name'] ?><br><br>
+                             <b>Votes: </b><?php echo $groupsdata[$i]['votes'] ?><br><br>
+                             <form action="#">
+                                 <input type="hidden" name="gvotes" value=""><?php echo $groupsdata[$i]['votes'] ?>
+                                 <input type="submit" name="votebtn" value="Vote" id="votebtn">
+                             </form>
+                          </div>
 
+                          <?php
+                       }
+                  }
+              ?>
           </div>
+           </div>
+          
 
        </div>
      
