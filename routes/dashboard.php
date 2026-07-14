@@ -7,7 +7,7 @@
     $userdata = $_SESSION['userdata'];
     $groupsdata = $_SESSION['groupsdata'];
 
-    if($userdata['status']==0){
+    if($_SESSION['userdata']['status']==0){
        $status = "<b style='color:red'>Not Voted</b>";
     }
     else{
@@ -68,14 +68,22 @@
          #mainpanel{
              padding: 10px;
          }
+
+         #voted{
+              padding: 5px;
+              font-size: 15px;
+              background-color: #3498db;
+              color: white;
+              border-radius: 5px;
+         }
    
       </style>
 
        <div id="mainSection">
           <center>
           <div id="headerSection">
-            <button id="backBtn">Back</button>
-            <button id="logoutBtn">Logout</button>
+            <a href="../"><button id="backBtn"> Back</button></a>
+             <a href="logout.php"><button id="logoutBtn">Logout</button></a>
             <h1>Online Voting System</h1>
           </div>
           </center>
@@ -103,7 +111,20 @@
                              <form action="../api/vote.php" method="post">
                                  <input type="hidden" name="gvotes" value="<?php echo $groupsdata[$i]['votes'] ?>">
                                  <input type="hidden" name="gid" value="<?php echo $groupsdata[$i]['id'] ?>">
-                                 <input type="submit" name="votebtn" value="Vote" id="votebtn">
+
+                                 <?php 
+                                     if($_SESSION['userdata']['status']==0){
+                                         ?>
+                                          <input type="submit" name="votebtn" value="Vote" id="votebtn">
+                                         <?php
+                                     }
+                                     else{
+                                         ?>
+                                           <button type="button" name="votebtn" value="Vote" id="voted">Voted</button>
+                                           <?php
+                                     }
+                                 ?>
+                                 
                              </form>
                           </div>
 
